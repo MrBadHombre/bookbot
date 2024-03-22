@@ -1,31 +1,43 @@
+def main():
+    book_path = "books/frankenstein.txt"
+    text = get_book_text(book_path)
+    num_words = get_num_words(text)
+    chars_dict = get_chars_dict(text)
+    create_report(chars_dict, num_words)
+   
+    # print(chars_dict)
 
 
-with open("books/frankenstein.txt") as f:
-    file_contents = f.read()
-
-def count_words(text):
+def get_num_words(text):
     words = text.split()
-    num_words = len(words)
-    print(num_words)
+    return len(words)
 
-# count_words(file_contents)
 
-my_string = file_contents
+def get_chars_dict(text):
+    chars = {}
+    for c in text:
+        lowered = c.lower()
+        if lowered in chars:
+            chars[lowered] += 1
+        else:
+            chars[lowered] = 1
+    return chars
 
-    
 
-my_dictionary = {}
+def get_book_text(path):
+    with open(path) as f:
+        return f.read()
 
-i_count = 0
+def create_report(chars, words):
+    print("--- Begin report of books/frankenstein.txt ---")
+    print(words, "words found in the document")
+    print()
 
-def count_letters(my_string):
+    for char, num in chars.items():
+        print("The value of ", char, "was found ", num, "times") 
 
-    for i in range(0, len(my_string.split())):
-        for j in range(0, i):
-            if j == "c":
-                i_count += 1
-    print(i_count)
 
+main()
 
 
     
